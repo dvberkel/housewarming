@@ -73,12 +73,18 @@
     var CoupleView = function(couple, context){
 	this.couple = couple;
 	this.context = context;
-	this.update();
+	this.initialize();
+    };
+    CoupleView.prototype.initialize = function(){
+	var image = this.image = new Image();
+	this.image.src = 'image/robin-marloes-small.jpg';
+	this.image.addEventListener('load', this.update.bind(this), false);
     };
     CoupleView.prototype.update = function(){
 	this.context.save();
-	this.context.fillStyle = 'red';
-	this.context.fillRect(this.couple.x, this.couple.y, 5, 5);
+	this.context.drawImage(this.image,
+			       this.couple.x - this.image.width/2,
+			       this.couple.y - this.image.height/2);
 	this.context.restore();
     };
 
