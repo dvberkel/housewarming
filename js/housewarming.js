@@ -139,14 +139,15 @@
     };
 
 
-    var BackgroundView = function(canvas, context){
+    var BackgroundView = function(canvas, context, options){
+	this.options = extend(options || {}, {color : 'rgba(0,0,0,0.1)' });
 	this.canvas = canvas;
 	this.context = context;
 	this.update();
     };
     BackgroundView.prototype.update = function(){
 	this.context.save();
-	this.context.fillStyle = 'rgba(0,0,0,0.1)';
+	this.context.fillStyle = this.options.color;
 	this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
 	this.context.restore();
@@ -157,7 +158,7 @@
 	this.canvas = canvas;
 	this.context = this.canvas.getContext('2d');
 	this.scenes = [
-	    new BackgroundView(this.canvas, this.context),
+	    new BackgroundView(this.canvas, this.context, options.background),
 	    new HouseView(this.game.house, this.context, options.house),
 	    new CoupleView(this.game.couple, this.context),
 	]

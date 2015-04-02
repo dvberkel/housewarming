@@ -5,6 +5,7 @@
 
     var game = new housewarming.Game();
     new housewarming.View(game, playground, {
+	background: { color: 'rgba(0,0,0,0.1)'},
 	house: {
 	    size: 20,
 	    color: 'green',
