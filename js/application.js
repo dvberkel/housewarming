@@ -3,12 +3,10 @@
     playground.width = document.body.clientWidth;
     playground.height = document.body.clientHeight;
 
-    var couple = new housewarming.Couple(200, 200);
-    var house = new housewarming.House(100, 100);
-    new housewarming.View(couple, house, playground);
+    var game = new housewarming.Game();
+    new housewarming.View(game, playground);
 
     document.body.addEventListener('mousemove', function(event){
-	console.log(event);
-	couple.placeAt(event.x, event.y);
+	game.couple.placeAt(event.x, event.y);
     })
 })(document, housewarming);

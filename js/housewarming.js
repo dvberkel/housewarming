@@ -23,19 +23,24 @@
 	this.x = x;
 	this.y = y;
 	this.emit('position-changed');
-    }
+    };
 
-    var Couple = $.Couple = function(x, y){
+    var Couple = function(x, y){
 	Position.call(this, x, y);
     };
     Couple.prototype = Object.create(Position.prototype);
     Couple.prototype.constructor = Couple;
 
-    var House = $.House = function(x, y){
+    var House = function(x, y){
 	Position.call(this, x, y);
     };
     House.prototype = Object.create(Position.prototype);
     House.prototype.constructor = Couple;
+
+    var Game = $.Game = function(){
+	this.couple = new Couple(200, 200);
+	this.house = new House(100, 100);
+    };
 
     var CoupleView = function(couple, context){
 	this.couple = couple;
@@ -74,18 +79,16 @@
 	this.context.restore();
     }
 
-
-    var View = $.View = function(couple, house, canvas){
-	this.couple = couple;
-	this.house = house;
+    var View = $.View = function(game, canvas){
+	this.game = game;
 	this.canvas = canvas;
 	this.context = this.canvas.getContext('2d');
 	this.scenes = [
 	    new BackgroundView(this.canvas, this.context),
-	    new HouseView(house, this.context),
-	    new CoupleView(couple, this.context),
+	    new HouseView(this.game.house, this.context),
+	    new CoupleView(this.game.couple, this.context),
 	]
-	this.couple.on('position-changed', this.update.bind(this));
+	this.game.couple.on('position-changed', this.update.bind(this));
 	this.update();
     };
     View.prototype.update = function(){
