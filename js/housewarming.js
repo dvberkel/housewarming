@@ -38,8 +38,19 @@
     House.prototype.constructor = Couple;
 
     var Game = $.Game = function(){
+	Observable.call(this);
 	this.couple = new Couple(200, 200);
 	this.house = new House(100, 100);
+	this.couple.on('position-changed', this.isFinished.bind(this));
+    };
+    Game.prototype = Object.create(Observable.prototype);
+    Game.prototype.constructor = Game;
+    Game.prototype.isFinished = function(){
+	if (
+	    (Math.abs(this.couple.x - this.house.x) +
+	     Math.abs(this.couple.y - this.house.y)) < 10) {
+	    this.emit('finished');
+	}
     };
 
     var CoupleView = function(couple, context){
