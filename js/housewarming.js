@@ -105,6 +105,22 @@
 	context.closePath();
 	context.fill();
     };
+    function drawWindows(context, x, y, size, color){
+	context.save();
+	context.fillStyle = color;
+	context.beginPath()
+	context.moveTo(x + 3*size/4, y - size/4);
+	context.lineTo(x + 3*size/4, y - 3*size/4);
+	context.lineTo(x + size/4, y - 3*size/4);
+	context.lineTo(x + size/4, y - size/4);
+	context.closePath();
+	context.moveTo(x - 3*size/4, y - size/4);
+	context.lineTo(x - 3*size/4, y - 3*size/4);
+	context.lineTo(x - size/4, y - 3*size/4);
+	context.lineTo(x - size/4, y - size/4);
+	context.closePath();
+	context.fill();
+    };
 
     var HouseView = function(house, context, options){
 	this.options = extend(options || {},
@@ -119,6 +135,7 @@
 	var x = this.house.x, y = this.house.y, size = this.options.houseSize;
 	drawHouse(this.context, x, y, size, this.options.houseColor);
 	drawDoor(this.context, x, y, size, this.options.doorColor);
+	drawWindows(this.context, x, y, size, this.options.doorColor);
     };
 
 
