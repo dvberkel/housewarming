@@ -4,6 +4,7 @@
     playground.height = document.body.clientHeight;
 
     var options = {
+	distance: 20,
 	couple: {
 	    x: 200, y: 200,
 	    src: 'image/robin-marloes-small.jpg'

@@ -54,18 +54,19 @@
     House.prototype.constructor = Couple;
 
     var Game = $.Game = function(options){
-	options = extend(options || {},
+	this.options = extend(options || {},
+			 { distance: 10 },
 			 { couple: { x: 200, y: 200} },
 			 { house: { x: 100, y: 100} });
 	Observable.call(this);
-	this.couple = new Couple(options.couple.x, options.couple.y);
-	this.house = new House(options.house.x, options.house.y);
+	this.couple = new Couple(this.options.couple.x, this.options.couple.y);
+	this.house = new House(this.options.house.x, this.options.house.y);
 	this.couple.on('position-changed', this.isFinished.bind(this));
     };
     Game.prototype = Object.create(Observable.prototype);
     Game.prototype.constructor = Game;
     Game.prototype.isFinished = function(){
-	if (distance(this.couple, this.house) < 10) {
+	if (distance(this.couple, this.house) < this.options.distance) {
 	    this.emit('finished');
 	}
     };
