@@ -1,4 +1,8 @@
 (function($){
+    var distance = function(u, v) {
+	return Math.abs(u.x - v.x) + Math.abs(u.y - v.y);
+    }
+
     var Observable = function(){
 	this.observers = {};
     };
@@ -46,9 +50,7 @@
     Game.prototype = Object.create(Observable.prototype);
     Game.prototype.constructor = Game;
     Game.prototype.isFinished = function(){
-	if (
-	    (Math.abs(this.couple.x - this.house.x) +
-	     Math.abs(this.couple.y - this.house.y)) < 10) {
+	if (distance(this.couple, this.house) < 10) {
 	    this.emit('finished');
 	}
     };
