@@ -55,11 +55,11 @@
 
     var Game = $.Game = function(options){
 	options = extend(options || {},
-			 {coupleX: 200, coupleY: 200},
-			 {houseX: 100, houseY: 100});
+			 { couple: { x: 200, y: 200} },
+			 { house: { x: 100, y: 100} });
 	Observable.call(this);
-	this.couple = new Couple(options.coupleX, options.coupleY);
-	this.house = new House(options.houseX, options.houseY);
+	this.couple = new Couple(options.couple.x, options.couple.y);
+	this.house = new House(options.house.x, options.house.y);
 	this.couple.on('position-changed', this.isFinished.bind(this));
     };
     Game.prototype = Object.create(Observable.prototype);

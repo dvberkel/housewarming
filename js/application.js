@@ -4,11 +4,13 @@
     playground.height = document.body.clientHeight;
 
     var options = {
-	houseX: 100, houseY: 100,
-	coupleX: 200, coupleY: 150,
-	couple: { src: 'image/robin-marloes-small.jpg' },
+	couple: {
+	    x: 200, y: 200,
+	    src: 'image/robin-marloes-small.jpg'
+	},
 	background: { color: 'rgba(0,0,0,0.1)'},
 	house: {
+	    x: 100, y: 100,
 	    size: 40,
 	    color: 'green',
 	    featuresColor: 'brown'
