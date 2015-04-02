@@ -49,21 +49,30 @@
     Couple.prototype = Object.create(Position.prototype);
     Couple.prototype.constructor = Couple;
 
-    var House = function(x, y){
+    var House = function(x, y, options){
+	this.options = extend(options || {}, { repulsion: 200 });
 	Position.call(this, x, y);
     };
     House.prototype = Object.create(Position.prototype);
     House.prototype.constructor = Couple;
+    House.prototype.evade = function(x, y, oldX, oldY) {
+	console.log();
+	if (distance(this, {x: x, y: y}) < this.options.repulsion) {
+	    var dx = x - oldX, dy = y - oldY;
+  	    this.placeAt(this.x + dx, this.y + dy);
+	}
+    }
 
     var Game = $.Game = function(options){
 	this.options = extend(options || {},
 			 { distance: 10 },
-			 { couple: { x: 200, y: 200} },
-			 { house: { x: 100, y: 100} });
+			 { couple: { x: 200, y: 200 } },
+			 { house: { x: 100, y: 100 } });
 	Observable.call(this);
 	this.couple = new Couple(this.options.couple.x, this.options.couple.y);
-	this.house = new House(this.options.house.x, this.options.house.y);
+	this.house = new House(this.options.house.x, this.options.house.y, this.options.house);
 	this.couple.on('position-changed', this.isFinished.bind(this));
+	this.couple.on('position-changed', this.house.evade.bind(this.house));
     };
     Game.prototype = Object.create(Observable.prototype);
     Game.prototype.constructor = Game;
