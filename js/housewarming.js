@@ -124,18 +124,18 @@
 
     var HouseView = function(house, context, options){
 	this.options = extend(options || {},
-			      { houseSize: 20 },
-			      { houseColor: 'green'},
-			      { doorColor: 'brown'});
+			      { size: 20 },
+			      { color: 'green'},
+			      { featuresColor: 'brown'});
 	this.house = house;
 	this.context = context;
 	this.update();
     };
     HouseView.prototype.update = function(){
-	var x = this.house.x, y = this.house.y, size = this.options.houseSize;
-	drawHouse(this.context, x, y, size, this.options.houseColor);
-	drawDoor(this.context, x, y, size, this.options.doorColor);
-	drawWindows(this.context, x, y, size, this.options.doorColor);
+	var x = this.house.x, y = this.house.y, size = this.options.size;
+	drawHouse(this.context, x, y, size, this.options.color);
+	drawDoor(this.context, x, y, size, this.options.featuresColor);
+	drawWindows(this.context, x, y, size, this.options.featuresColor);
     };
 
 
@@ -152,13 +152,13 @@
 	this.context.restore();
     }
 
-    var View = $.View = function(game, canvas){
+    var View = $.View = function(game, canvas, options){
 	this.game = game;
 	this.canvas = canvas;
 	this.context = this.canvas.getContext('2d');
 	this.scenes = [
 	    new BackgroundView(this.canvas, this.context),
-	    new HouseView(this.game.house, this.context),
+	    new HouseView(this.game.house, this.context, options.house),
 	    new CoupleView(this.game.couple, this.context),
 	]
 	this.game.couple.on('position-changed', this.update.bind(this));

@@ -4,7 +4,13 @@
     playground.height = document.body.clientHeight;
 
     var game = new housewarming.Game();
-    new housewarming.View(game, playground);
+    new housewarming.View(game, playground, {
+	house: {
+	    size: 20,
+	    color: 'green',
+	    featuresColor: 'brown'
+	}
+    });
 
     function mousemoveHandler(event){
 	game.couple.placeAt(event.x, event.y);
