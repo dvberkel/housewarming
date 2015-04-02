@@ -30,5 +30,9 @@
 	p.innerHTML = 'Congratulations';
 	p.setAttribute('class', 'winning');
 	document.body.appendChild(p);
-    })
+    });
+
+    game.couple.on('position-changed', function(x, y, oldX, oldY){
+	console.log(x, y, oldX, oldY);
+    });
 })(document, housewarming);

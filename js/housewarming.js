@@ -22,9 +22,9 @@
 	(this.observers[event] = this.observers[event] || []).push(observer);
     };
     Observable.prototype.emit = function(event){
-	var args = Array.prototype.slice(arguments, 1);
+	var args = Array.prototype.slice.call(arguments, 1);
 	(this.observers[event] || []).forEach(function(observer){
-	    observer(args);
+	    observer.apply(observer, args);
 	});
     };
 
@@ -36,9 +36,11 @@
     Position.prototype = Object.create(Observable.prototype);
     Position.prototype.constructor = Position;
     Position.prototype.placeAt = function(x, y){
+	var oldX = this.x;
+	var oldY = this.y;
 	this.x = x;
 	this.y = y;
-	this.emit('position-changed');
+	this.emit('position-changed', x, y, oldX, oldY);
     };
 
     var Couple = function(x, y){
