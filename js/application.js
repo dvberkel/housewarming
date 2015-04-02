@@ -3,5 +3,6 @@
     playground.width = document.body.clientWidth;
     playground.height = document.body.clientHeight;
 
-    new housewarming.View(playground);
+    var house = new housewarming.House(100, 100);
+    new housewarming.View(house, playground);
 })(document, housewarming);
