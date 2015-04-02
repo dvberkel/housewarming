@@ -1,8 +1,29 @@
 (function($){
+    var Observable = function(){
+	this.observers = {};
+    };
+    Observable.prototype.on = function(event, observer){
+	(this.observers[event] = this.observers[event] || []).push(observer);
+    };
+    Observable.prototype.emit = function(event){
+	var args = Array.prototype.slice(arguments, 1);
+	(this.observers[event] || []).forEach(function(observer){
+	    observer(args);
+	});
+    };
+
     var Position = function(x, y){
+	Observable.call(this);
 	this.x = x || 0;
 	this.y = y || 0;
     };
+    Position.prototype = Object.create(Observable.prototype);
+    Position.prototype.constructor = Position;
+    Position.prototype.placeAt = function(x, y){
+	this.x = x;
+	this.y = y;
+	this.emit('position-changed');
+    }
 
     var Couple = $.Couple = function(x, y){
 	Position.call(this, x, y);
@@ -64,6 +85,7 @@
 	    new HouseView(house, this.context),
 	    new CoupleView(couple, this.context),
 	]
+	this.couple.on('position-changed', this.update.bind(this));
 	this.update();
     };
     View.prototype.update = function(){
