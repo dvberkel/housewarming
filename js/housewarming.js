@@ -1,7 +1,19 @@
 (function($){
-    var distance = function(u, v) {
+    var distance = function(u, v){
 	return Math.abs(u.x - v.x) + Math.abs(u.y - v.y);
-    }
+    };
+
+    var extend = function(){
+	var result = {};
+	var args = Array.prototype.slice.call(arguments).forEach(function(data){
+	    for (var key in data){
+		if (result[key] == undefined) {
+		    result[key] = data[key];
+		}
+	    }
+	});
+	return result;
+    };
 
     var Observable = function(){
 	this.observers = {};
@@ -41,10 +53,13 @@
     House.prototype = Object.create(Position.prototype);
     House.prototype.constructor = Couple;
 
-    var Game = $.Game = function(){
+    var Game = $.Game = function(options){
+	options = extend(options || {},
+			 {coupleX: 200, coupleY: 200},
+			 {houseX: 100, houseY: 100});
 	Observable.call(this);
-	this.couple = new Couple(200, 200);
-	this.house = new House(100, 100);
+	this.couple = new Couple(options.coupleX, options.coupleY);
+	this.house = new House(options.houseX, options.houseY);
 	this.couple.on('position-changed', this.isFinished.bind(this));
     };
     Game.prototype = Object.create(Observable.prototype);
