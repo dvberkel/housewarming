@@ -3,16 +3,19 @@
     playground.width = document.body.clientWidth;
     playground.height = document.body.clientHeight;
 
-    var game = new housewarming.Game();
-    new housewarming.View(game, playground, {
+    var options = {
+	houseX: 100, houseY: 100,
+	coupleX: 200, coupleY: 150,
 	couple: { src: 'image/robin-marloes-small.jpg' },
 	background: { color: 'rgba(0,0,0,0.1)'},
 	house: {
-	    size: 20,
+	    size: 40,
 	    color: 'green',
 	    featuresColor: 'brown'
 	}
-    });
+    };
+    var game = new housewarming.Game(options);
+    new housewarming.View(game, playground, options);
 
     function mousemoveHandler(event){
 	game.couple.placeAt(event.x, event.y);
