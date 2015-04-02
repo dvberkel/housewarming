@@ -12,6 +12,14 @@ canvas {
     z-index: -1;
 }
 
-h1 {
+h1, p {
     text-align: center;
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+p {
+    margin-top: 5px;
 }
