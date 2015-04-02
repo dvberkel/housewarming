@@ -6,12 +6,12 @@
     var options = {
 	distance: 20,
 	couple: {
-	    x: 200, y: 200,
+	    x: 3*playground.width/4, y: playground.height/2,
 	    src: 'image/robin-marloes-small.jpg'
 	},
 	background: { color: 'rgba(0,0,0,0.1)'},
 	house: {
-	    x: 100, y: 100,
+	    x: playground.width/4, y: playground.height/2,
 	    size: 40,
 	    color: 'green',
 	    featuresColor: 'brown'
