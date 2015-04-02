@@ -82,17 +82,30 @@
 	this.context.restore();
     };
 
-    var HouseView = function(house, context){
+    function drawHouse(context, x, y, size, color){
+	context.save();
+	context.fillStyle = color;
+	context.beginPath()
+	context.moveTo(x + size, y + size);
+	context.lineTo(x + size, y - size);
+	context.lineTo(x, y - 2 * size);
+	context.lineTo(x - size, y - size);
+	context.lineTo(x - size, y + size);
+	context.closePath();
+	context.fill();
+    }
+
+    var HouseView = function(house, context, options){
+	this.options = extend(options || {}, { houseSize: 20 }, { houseColor: 'green'});
 	this.house = house;
 	this.context = context;
 	this.update();
     };
     HouseView.prototype.update = function(){
-	this.context.save();
-	this.context.fillStyle = 'green';
-	this.context.fillRect(this.house.x, this.house.y, 20, 20);
-	this.context.restore();
+	var x = this.house.x, y = this.house.y, size = this.options.houseSize;
+	drawHouse(context, x, y, size, this.options.houseColor);
     };
+
 
     var BackgroundView = function(canvas, context){
 	this.canvas = canvas;
