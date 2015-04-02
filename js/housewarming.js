@@ -70,14 +70,15 @@
 	}
     };
 
-    var CoupleView = function(couple, context){
+    var CoupleView = function(couple, context, options){
+	this.options = extend(options || {}, { src: 'image/robin-marloes-small.jpg' });
 	this.couple = couple;
 	this.context = context;
 	this.initialize();
     };
     CoupleView.prototype.initialize = function(){
 	var image = this.image = new Image();
-	this.image.src = 'image/robin-marloes-small.jpg';
+	this.image.src = this.options.src;
 	this.image.addEventListener('load', this.update.bind(this), false);
     };
     CoupleView.prototype.update = function(){
@@ -166,7 +167,7 @@
 	this.scenes = [
 	    new BackgroundView(this.canvas, this.context, options.background),
 	    new HouseView(this.game.house, this.context, options.house),
-	    new CoupleView(this.game.couple, this.context),
+	    new CoupleView(this.game.couple, this.context, options.couple),
 	]
 	this.game.couple.on('position-changed', this.update.bind(this));
 	this.update();
