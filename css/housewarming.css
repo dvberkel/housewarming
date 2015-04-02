@@ -23,3 +23,12 @@ h1 {
 p {
     margin-top: 5px;
 }
+
+.winning {
+    font-size: 400%;
+    color: red;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

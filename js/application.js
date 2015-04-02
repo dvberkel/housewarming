@@ -12,6 +12,9 @@
     document.body.addEventListener('mousemove', mousemoveHandler);
     game.on('finished', function(){
 	document.body.removeEventListener('mousemove', mousemoveHandler);
-	console.log('finished');
+	var p = document.createElement('p');
+	p.innerHTML = 'Congratulations';
+	p.setAttribute('class', 'winning');
+	document.body.appendChild(p);
     })
 })(document, housewarming);
