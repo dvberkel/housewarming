@@ -93,17 +93,32 @@
 	context.lineTo(x - size, y + size);
 	context.closePath();
 	context.fill();
-    }
+    };
+    function drawDoor(context, x, y, size, color){
+	context.save();
+	context.fillStyle = color;
+	context.beginPath()
+	context.moveTo(x + size/2, y + size);
+	context.lineTo(x + size/2, y);
+	context.lineTo(x, y);
+	context.lineTo(x, y + size);
+	context.closePath();
+	context.fill();
+    };
 
     var HouseView = function(house, context, options){
-	this.options = extend(options || {}, { houseSize: 20 }, { houseColor: 'green'});
+	this.options = extend(options || {},
+			      { houseSize: 20 },
+			      { houseColor: 'green'},
+			      { doorColor: 'brown'});
 	this.house = house;
 	this.context = context;
 	this.update();
     };
     HouseView.prototype.update = function(){
 	var x = this.house.x, y = this.house.y, size = this.options.houseSize;
-	drawHouse(context, x, y, size, this.options.houseColor);
+	drawHouse(this.context, x, y, size, this.options.houseColor);
+	drawDoor(this.context, x, y, size, this.options.doorColor);
     };
 
 
