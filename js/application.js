@@ -33,26 +33,20 @@
 	document.body.appendChild(p);
     });
 
+    var code = new konami.Code();
     var go = document.getElementById('go');
     go.addEventListener('click', function(){
 	document.body.removeChild(go);
 	document.body.addEventListener('mousemove', mousemoveHandler);
-	document.body.addEventListener('keyup', function(event){
-	    if (event.keyCode == 65) {
-		document.body.removeEventListener('mousemove', mousemoveHandler);
-		target = 'house';
-		document.body.appendChild(go);
-		go.setAttribute('style',
-				'left: ' + game.house.x + 'px;',
-				'top: ' + game.house.y + 'px;');
-	    }
-	});
+	document.body.addEventListener('keyup', code.keyListener.bind(code));
     });
 
-    var code = new konami.Code();
-    code.on('code', function(step){ console.log(step)});
-    code.on('reset', function(){ console.log('whoops')});
-    code.on('konami', function(){ console.log('power up')});
-    document.body.addEventListener('keyup', code.keyListener.bind(code));
-
+    code.on('konami', function(){
+	document.body.removeEventListener('mousemove', mousemoveHandler);
+	target = 'house';
+	document.body.appendChild(go);
+	go.setAttribute('style',
+			'left: ' + game.house.x + 'px;',
+			'top: ' + game.house.y + 'px;');
+    });
 })(document, housewarming, konami);
