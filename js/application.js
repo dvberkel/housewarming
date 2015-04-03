@@ -44,7 +44,7 @@
 		document.body.appendChild(go);
 		go.setAttribute('style',
 				'left: ' + game.house.x + 'px;',
-				'top: ' + game.house.top + 'px;');
+				'top: ' + game.house.y + 'px;');
 	    }
 	});
     });
