@@ -1,4 +1,5 @@
 (function(document, housewarming){
+
     var playground = document.getElementById('playground');
     playground.width = document.body.clientWidth;
     playground.height = document.body.clientHeight;
@@ -23,7 +24,6 @@
     function mousemoveHandler(event){
 	game.couple.placeAt(event.x, event.y);
     }
-    document.body.addEventListener('mousemove', mousemoveHandler);
     game.on('finished', function(){
 	document.body.removeEventListener('mousemove', mousemoveHandler);
 	var p = document.createElement('p');
@@ -31,4 +31,11 @@
 	p.setAttribute('class', 'winning');
 	document.body.appendChild(p);
     });
+
+    var go = document.getElementById('go');
+    go.addEventListener('click', function(){
+	document.body.removeChild(go);
+	document.body.addEventListener('mousemove', mousemoveHandler);
+    });
+
 })(document, housewarming);
