@@ -187,6 +187,7 @@
 	    new CoupleView(this.game.couple, this.context, options.couple),
 	]
 	this.game.couple.on('position-changed', this.update.bind(this));
+	this.game.house.on('position-changed', this.update.bind(this));
 	this.update();
     };
     View.prototype.update = function(){

@@ -37,6 +37,17 @@
     go.addEventListener('click', function(){
 	document.body.removeChild(go);
 	document.body.addEventListener('mousemove', mousemoveHandler);
+	document.body.addEventListener('keyup', function(event){
+	    if (event.keyCode == 65) {
+		document.body.removeEventListener('mousemove', mousemoveHandler);
+		target = 'house';
+		document.body.appendChild(go);
+		go.setAttribute('style',
+				'left: ' + game.house.x + 'px;',
+				'top: ' + game.house.top + 'px;');
+	    }
+	});
     });
+
 
 })(document, housewarming);
