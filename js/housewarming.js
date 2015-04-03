@@ -43,7 +43,6 @@
     House.prototype = Object.create(Position.prototype);
     House.prototype.constructor = Couple;
     House.prototype.evade = function(x, y, oldX, oldY) {
-	console.log();
 	if (distance(this, {x: x, y: y}) < this.options.repulsion) {
 	    var dx = x - oldX, dy = y - oldY;
   	    this.placeAt(this.x + dx, this.y + dy);
