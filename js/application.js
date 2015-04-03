@@ -23,7 +23,7 @@
 
     var target = 'couple';
     function mousemoveHandler(event){
-        game[target].placeAt(event.x, event.y);
+        game[target].placeAt(event.clientX, event.clientY);
     }
     game.on('finished', function(){
         document.body.removeEventListener('mousemove', mousemoveHandler);
