@@ -1,4 +1,4 @@
-(function(document, housewarming){
+(function(document, housewarming, konami){
 
     var playground = document.getElementById('playground');
     playground.width = document.body.clientWidth;
@@ -49,5 +49,10 @@
 	});
     });
 
+    var code = new konami.Code();
+    code.on('code', function(step){ console.log(step)});
+    code.on('reset', function(){ console.log('whoops')});
+    code.on('konami', function(){ console.log('power up')});
+    document.body.addEventListener('keyup', code.keyListener.bind(code));
 
-})(document, housewarming);
+})(document, housewarming, konami);
