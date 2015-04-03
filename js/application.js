@@ -49,4 +49,6 @@
 			'left: ' + game.house.x + 'px;',
 			'top: ' + game.house.y + 'px;');
     });
+
+    console.log('Do you know the Konami code?');
 })(document, housewarming, konami);
