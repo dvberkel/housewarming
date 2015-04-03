@@ -78,6 +78,7 @@
 	this.house = new House(this.options.house.x, this.options.house.y, this.options.house);
 	this.couple.on('position-changed', this.isFinished.bind(this));
 	this.couple.on('position-changed', this.house.evade.bind(this.house));
+	this.house.on('position-changed', this.isFinished.bind(this));
     };
     Game.prototype = Object.create(Observable.prototype);
     Game.prototype.constructor = Game;
