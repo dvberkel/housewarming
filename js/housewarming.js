@@ -1,4 +1,4 @@
-(function($){
+(function($, Observable){
     var distance = function(u, v){
 	return Math.abs(u.x - v.x) + Math.abs(u.y - v.y);
     };
@@ -13,24 +13,6 @@
 	    }
 	});
 	return result;
-    };
-
-    var Observable  = function(){
-	this.observers = {};
-    };
-    Observable.prototype.on = function(event, observer){
-	(this.observers[event] = this.observers[event] || []).push(observer);
-    };
-    Observable.prototype.off = function(event, observer){
-	this.observers[event] = (this.observers[event] || []).filter(function(o){
-	    return o != observer;
-	});
-    };
-    Observable.prototype.emit = function(event){
-	var args = Array.prototype.slice.call(arguments, 1);
-	(this.observers[event] || []).forEach(function(observer){
-	    observer.apply(observer, args);
-	});
     };
 
     var Position = function(x, y){
@@ -196,4 +178,4 @@
 	    scene.update();
 	});
     };
-})(window.housewarming = window.housewarming || {});
+})(window.housewarming = window.housewarming || {}, Observable);
