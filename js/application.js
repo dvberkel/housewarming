@@ -21,8 +21,9 @@
     var game = new housewarming.Game(options);
     new housewarming.View(game, playground, options);
 
+    var target = 'couple';
     function mousemoveHandler(event){
-	game.couple.placeAt(event.x, event.y);
+	game[target].placeAt(event.x, event.y);
     }
     game.on('finished', function(){
 	document.body.removeEventListener('mousemove', mousemoveHandler);
